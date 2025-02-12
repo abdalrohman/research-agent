@@ -1,0 +1,10 @@
+aiofiles
+litellm
+crawl4ai
+python-dotenv
+aiohttp
+cachetools
+tiktoken
+pydantic
+streamlit
+rich

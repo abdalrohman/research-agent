@@ -1,0 +1,30 @@
+services:
+  research_agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes:
+      - .:/app
+      - ./custom_reports:/app/reports
+    ports:
+      - '9090:9090'
+    networks:
+      - research_network
+    restart: unless-stopped
+    depends_on:
+      - searxng
+
+  searxng:
+    image: docker.io/searxng/searxng:latest
+    env_file: .env
+    volumes:
+      - ./searxng:/etc/searxng:rw
+    ports:
+      - '${SEARXNG_PORT:-8080}:8080'
+    networks:
+      - research_network
+    restart: unless-stopped
+
+networks:
+  research_network:
