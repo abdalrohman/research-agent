@@ -27,4 +27,8 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DEFAULT_TIMEOUT=100 \
     DEBIAN_FRONTEND=noninteractive
 
-ENTRYPOINT ["streamlit", "run", "ui.py", "--server.port=9090", "--server.address=0.0.0.0"]
+# Comment out Streamlit entrypoint
+# ENTRYPOINT ["streamlit", "run", "ui.py", "--server.port=9090", "--server.address=0.0.0.0"]
+
+# Add FastAPI entrypoint
+ENTRYPOINT ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "9090"]
